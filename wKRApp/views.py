@@ -32,6 +32,8 @@ def index():
             session['logged_in'] = True
             flash('You were just logged in')
             return redirect(url_for('admin'))
+        elif request.form['username'] == '' or request.form['password'] == '':
+            error = 'Invalid credentials. Please try again.'
         else:
             session['logged_in'] = True
             flash('You were just logged in')
