@@ -41,11 +41,11 @@ def index():
     return render_template('signin.html', error=error)
 
 
-
 @app.route('/team')
 @login_required
 def team():
     return render_template('team.html')
+
 
 @app.route('/logout')
 @login_required
@@ -53,6 +53,7 @@ def logout():
     session.pop('logged_in', None) 
     flash('You were just logged out')
     return redirect(url_for('index'))
+
 
 @app.route('/kra', methods=['GET', 'POST'])
 @login_required
@@ -104,13 +105,13 @@ def new_role():
         return render_template('new_role.html')
     return render_template('new_role.html')
 
+
 @app.route('/new_user', methods=['GET', 'POST'])
 @login_required
 def new_user():
     if request.method == 'POST':
         return render_template('new_user.html')
     return render_template('new_user.html')
-
 
 
 def connect_db():
