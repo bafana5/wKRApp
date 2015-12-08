@@ -120,9 +120,9 @@ def new_user():
         return render_template('new_user.html')
     return render_template('new_user.html')
 
-
 # def connect_db():
 #     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #     db_path = os.path.join(BASE_DIR + '\db', app.database)
 #     return sqlite3.connect(db_path)
+
 
