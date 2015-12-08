@@ -1,16 +1,22 @@
 from wKRApp import app
 from flask import Flask, render_template, url_for, request, redirect, session, flash, g
+from flask.ext.sqlalchemy import SQLAlchemy
 from ipdb import set_trace
 from functools import wraps
-import sqlite3
-import os.path
+# import sqlite3
 
- # 2 security flaws, need to sort out
- #      1. the key should be randomy generated
- #      2. the key should be set in a config file that is then imported in.
-app.secret_key = "my precious"
-app.database = "sample.db"
 
+
+# config
+import os
+# app.config.from_object(os.environ['APP_SETTINGS'])
+app.config.from_object('config.DevelopmentConfig')
+
+# create the sqlalchemy object
+db = SQLAlchemy(app)
+
+# 
+from models import Users
 
 # login required decorator
 def login_required(f):
@@ -66,12 +72,13 @@ def kra():
 @app.route('/admin')
 @login_required
 def admin():
-    g.db = connect_db()
-    db_object = g.db
-    cur = db_object.execute('SELECT * from posts')
-    posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
-    g.db.close()
-    return render_template('admin.html', posts=posts)
+    users = db.session.query(Users).all()
+    # g.db = connect_db()
+    # db_object = g.db
+    # cur = db_object.execute('SELECT * from posts')
+    # posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+    # g.db.close()
+    return render_template('admin.html', users=users)
 
 
 @app.route('/users')
@@ -114,8 +121,8 @@ def new_user():
     return render_template('new_user.html')
 
 
-def connect_db():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    db_path = os.path.join(BASE_DIR + '\db', app.database)
-    return sqlite3.connect(db_path)
+# def connect_db():
+#     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#     db_path = os.path.join(BASE_DIR + '\db', app.database)
+#     return sqlite3.connect(db_path)
 

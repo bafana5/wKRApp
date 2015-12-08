@@ -10,12 +10,23 @@
         </div><!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-            	<br>
+                <br>
                 <h3>Posts:</h3>
-                {% for post in posts %}
-                	<strong>Title:</strong> {{ post.title }} </br>
-                	<strong>Post:</strong> {{ post.description }} <br>
-                	<br>
+                {% for user in users %}
+                    <strong>Employee ID:</strong>   {{ user.employeeID }} </br>
+                    <strong>Name:</strong>          {{ user.name }} <br>
+                    <strong>Surname:</strong>       {{ user.surname }} </br>
+                    <strong>Email:</strong>         {{ user.email }} <br>
+                    <strong>Telephone:</strong>     {{ user.telephone }} </br>
+                    <strong>User Role:</strong>     {{ user.userRole }} <br>
+                    <strong>Career Level:</strong>  {{ user.careerLevel }} </br>
+                    <strong>Career Ladder:</strong> {{ user.careerLadder }} <br>
+                    <strong>Unit:</strong>          {{ user.unit }} </br>
+                    <strong>Username:</strong>      {{ user.username }} <br>
+                    <strong>Password:</strong>      {{ user.password }} </br>
+                    <strong>Blocked:</strong>       {{ user.bocked }} <br>
+                    <strong>Destroyed:</strong>     {{ user.destroyed }} <br>
+                    <br>
                 {% endfor %}
             </div><!-- /.col-lg-12 -->
         </div><!-- /.row -->
