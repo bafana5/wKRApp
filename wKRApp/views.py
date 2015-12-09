@@ -10,7 +10,9 @@ from functools import wraps
 # config
 import os
 # app.config.from_object(os.environ['APP_SETTINGS'])
-app.config.from_object('config.DevelopmentConfig')
+# app.config.from_object('config.DevelopmentConfig')
+app.secret_key = "]\x9f\x85nj\xe3\xb4;\xea\xe3\xfb\xb2\xe1\x14I\xff\x16\x9f\xa6'\xa0,\x11\x92"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/sample.db'
 
 # create the sqlalchemy object
 db = SQLAlchemy(app)
